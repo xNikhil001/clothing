@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
 import {
   signInWithGooglePopup,
   createUserDocument,
@@ -12,7 +13,8 @@ export default function SignIn() {
 
   return (
     <div>
-      <button onClick={logGoogleUser}>Sign In</button>
+      <SignUpForm />
+      <button onClick={logGoogleUser}>Sign In With Google</button>
     </div>
   );
 }
