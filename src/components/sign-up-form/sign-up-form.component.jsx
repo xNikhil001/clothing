@@ -1,10 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocument,
 } from "../../utils/firebase/firebase.utils";
+import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
+import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
   displayName: "",
@@ -16,6 +18,7 @@ const defaultFormFields = {
 export default function SignUpForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -31,7 +34,6 @@ export default function SignUpForm() {
         email,
         password
       );
-
       const userDocRef = await createUserDocument(user, { displayName });
 
       resetFormFields();
@@ -48,11 +50,12 @@ export default function SignUpForm() {
   };
 
   return (
-    <div>
-      <h1>Sign up</h1>
+    <div className="sign-up-container">
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label= "Display Name"
+          label="Display Name"
           type="text"
           required
           onChange={handleChange}
@@ -60,7 +63,7 @@ export default function SignUpForm() {
           value={displayName}
         />
         <FormInput
-          label= "Email"
+          label="Email"
           type="email"
           required
           onChange={handleChange}
@@ -68,7 +71,7 @@ export default function SignUpForm() {
           value={email}
         />
         <FormInput
-          label= "Password"
+          label="Password"
           type="password"
           required
           onChange={handleChange}
@@ -76,14 +79,14 @@ export default function SignUpForm() {
           value={password}
         />
         <FormInput
-          label= "Confirm Password"
+          label="Confirm Password"
           type="password"
           required
           onChange={handleChange}
           name="confirmPassword"
           value={confirmPassword}
-          />
-        <button type="submit">Sign Up</button>
+        />
+        <Button type="submit">Sign UP</Button>
       </form>
     </div>
   );
